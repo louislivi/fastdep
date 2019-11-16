@@ -13,15 +13,22 @@ Quick Build
 If you want to bootstrap fastdep, you'll need:
 - Java 1.8+
 - Spring Boot 2.0+
-```xml
-<dependency>
-    <groupId>com.louislivi.fastdep</groupId>
-    <artifactId>Module Name</artifactId>
-    <version>1.0.0</version>
-</dependency>
-```
-- Modules
-
+- Import dependency
+    - Maven
+    ```xml
+    <dependency>
+        <groupId>com.louislivi.fastdep</groupId>
+        <artifactId>${Module Name}</artifactId>
+        <version>1.0.0</version>
+    </dependency>
+    ```
+    - Gradle
+    ```groovy
+    compile group: 'com.louislivi.fastdep', name: '${Module Name}', version: '1.0.0'
+    ```
+  
+Modules
+-------
 |  Module Name  |  Description  | Include dependency |
 | ------------ | ------------- | ------------------ |
 | fastdep-datasource   | Multiple dataSource | jta+druid+mybatis |
