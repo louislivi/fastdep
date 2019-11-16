@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.louislivi.fastdep.test.mapper.test.TestMapper">
+  <resultMap id="BaseResultMap" type="com.louislivi.fastdep.test.dao.Test">
+    <id column="a" jdbcType="INTEGER" property="a" />
+    <result column="b" jdbcType="INTEGER" property="b" />
+    <result column="c" jdbcType="INTEGER" property="c" />
+  </resultMap>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select a, b, c
+    from test
+  </select>
+  <insert id="insert">
+    insert into test(a, b, c)
+    values (1,2,3)
+  </insert>
+</mapper>
