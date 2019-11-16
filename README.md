@@ -24,8 +24,8 @@ If you want to bootstrap fastdep, you'll need:
 
 |  Module Name  |  Description  | Include dependency |
 | ------------ | ------------- | ------------------ |
-| datasource   | Multiple dataSource | jta+druid+mybatis |
-| redis   | Multiple redis dataSource  | redis+redisTemplate |
+| fastdep-datasource   | Multiple dataSource | jta+druid+mybatis |
+| fastdep-redis   | Multiple redis dataSource  | redis+redisTemplate |
 
 Documentation
 -------------
