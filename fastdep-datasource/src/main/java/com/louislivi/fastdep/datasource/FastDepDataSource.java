@@ -10,7 +10,6 @@ import java.util.Map;
  * FastDepDataSource
  *
  * @author : louislivi
- * @date : 2019-11-15 14:54
  */
 @ConditionalOnProperty("fastdep.datasource")
 @ConfigurationProperties("fastdep")

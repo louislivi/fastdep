@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Import;
  * FastDepDataSourceAutoConfiguration
  *
  * @author : louislivi
- * @date : 2019-11-12 10:23
  */
 @Configuration
 @EnableConfigurationProperties({FastDepDataSource.class})

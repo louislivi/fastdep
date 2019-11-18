@@ -13,7 +13,6 @@ import org.springframework.core.type.AnnotationMetadata;
  * FastDepRedis Register
  *
  * @author : louislivi
- * @date : 2019-11-11 09:14
  */
 public class FastDepRedisRegister implements EnvironmentAware, ImportBeanDefinitionRegistrar {
 

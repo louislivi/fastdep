@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Import;
 
 /**
  * @author : louislivi
- * @date : 2019-11-16 11:49
  */
 @Configuration
 @AutoConfigureBefore({RedisAutoConfiguration.class})

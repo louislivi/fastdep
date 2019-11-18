@@ -16,7 +16,6 @@ import javax.transaction.UserTransaction;
  * FastDepAtomikosTransactionConfigure
  *
  * @author : louislivi
- * @date : 2019-03-25 19:27
  */
 @Configuration
 @ConditionalOnClass(TransactionManager.class)
@@ -37,7 +36,7 @@ public class FastDepAtomikosTransactionConfigure {
      * PlatformTransactionManager
      *
      * @return PlatformTransactionManager
-     * @throws Throwable
+     * @throws Throwable throwable
      */
     @Bean(name = "txManager")
     @DependsOn({"userTransaction", "atomikosTransactionManager"})
@@ -51,7 +50,7 @@ public class FastDepAtomikosTransactionConfigure {
      * userTransaction
      *
      * @return userTransactionImp
-     * @throws Throwable
+     * @throws Throwable throwable
      */
     @Bean(name = "userTransaction")
     public UserTransaction userTransaction() throws Throwable {

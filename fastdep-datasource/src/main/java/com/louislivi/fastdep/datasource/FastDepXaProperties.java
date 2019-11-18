@@ -15,7 +15,6 @@ import java.util.StringTokenizer;
  * FastDepXa Properties
  *
  * @author : louislivi
- * @date : 2019-11-15 17:20
  */
 public class FastDepXaProperties {
 

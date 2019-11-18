@@ -31,8 +31,8 @@ import java.util.function.Supplier;
  * FastDepDataSource Register
  *
  * @author : louislivi
- * @date : 2019-11-11 09:14
  */
+@SuppressWarnings("unchecked")
 public class FastDepDataSourceRegister implements EnvironmentAware, ImportBeanDefinitionRegistrar {
 
     private static final Logger logger = LoggerFactory.getLogger(FastDepDataSourceRegister.class);
