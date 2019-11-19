@@ -12,4 +12,5 @@ _|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|
 > fastdep是一个快速集成依赖的框架，集成了一些常用的依赖。
 
 [GitHub](https://github.com/louislivi/fastdep)
+[码云](https://gitee.com/louislivi/fastdep)
 [起步](README.md)
