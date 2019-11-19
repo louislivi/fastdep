@@ -1,3 +1,12 @@
+中文 | [English](./README-EN.md)
+```
+     __                    _         _             _ __  
+    / _|  __ _     ___    | |_    __| |    ___    | '_ \ 
+   |  _| / _` |   (_-<    |  _|  / _` |   / -_)   | .__/ 
+  _|_|_  \__,_|   /__/_   _\__|  \__,_|   \___|   |_|__  
+_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""|_|"""""| 
+"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-' 
+```
 fastdep
 ============
 [![release](https://img.shields.io/github/release/louislivi/fastdep.svg?style=popout-square)](https://github.com/louislivi/fastdep/releases)
@@ -5,20 +14,19 @@ fastdep
 [![fastdep](https://img.shields.io/badge/fastdep-%F0%9F%92%97-pink.svg?style=popout-square)](https://github.com/louislivi/fastdep)
 [![Apache License, Version 2.0](https://img.shields.io/github/license/apache/maven.svg?label=License)][license]
 
-fastdep is a framework for fast integration dependencies,
-integrate some common dependency injections.
+`fastdep`是一个快速集成依赖的框架，集成了一些常用公共的依赖。
 
-Quick Build
+快速开始
 -------
-If you want to bootstrap fastdep, you'll need:
+如果你想使用`fastdep`,你需要：
 - Java 1.8+
 - Spring Boot 2.0+
-- Import dependency
+- 引入依赖
     - Maven
     ```xml
     <dependency>
         <groupId>com.louislivi.fastdep</groupId>
-        <artifactId>${Module Name}</artifactId>
+        <artifactId>${模块名称}</artifactId>
         <version>1.0.0</version>
     </dependency>
     ```
@@ -27,21 +35,21 @@ If you want to bootstrap fastdep, you'll need:
     compile group: 'com.louislivi.fastdep', name: '${Module Name}', version: '1.0.0'
     ```
   
-Modules
+模块
 -------
-|  Module Name  |  Description  | Include dependency |
+|  模块名称  |  描述  | 引入的依赖 |
 | ------------ | ------------- | ------------------ |
-| fastdep-datasource   | Multiple dataSource | jta+druid+mybatis |
-| fastdep-redis   | Multiple redis dataSource  | redis+redisTemplate |
+| fastdep-datasource   | 多数据源 | jta+druid+mybatis |
+| fastdep-redis   | Redis多数据源  | redis+redisTemplate |
 
-Documentation
--------------
-
-More information can be found on [Fastdep Homepage][home].
-
-License
+文档
 -------
-This code is under the [Apache Licence v2][license]
+
+更多信息可以在 [Fastdep 首页][home] 中找到.
+
+协议
+-------
+[Apache Licence v2][license]
 
 
 [home]: https://fastdep.louislivi.com/
