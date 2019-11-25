@@ -4,21 +4,14 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class UserRequestData implements Serializable {
-    private Long userId;
-
-    private String nickname;
-
-    private String avatar;
-
-    private Date createdTime;
-
-    private Date updateTime;
-
-    private String query;
-
-    private String headers;
-
     private static final long serialVersionUID = 1L;
+    private Long userId;
+    private String nickname;
+    private String avatar;
+    private Date createdTime;
+    private Date updateTime;
+    private String query;
+    private String headers;
 
     public Long getUserId() {
         return userId;

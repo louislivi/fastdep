@@ -33,6 +33,7 @@ public class FastDepDataSource {
         protected volatile long minEvictableIdleTimeMillis;
 
         protected volatile long maxEvictableIdleTimeMillis;
+        private String mapper;
 
         @Override
         public long getMinEvictableIdleTimeMillis() {
@@ -53,8 +54,6 @@ public class FastDepDataSource {
         public void setMaxEvictableIdleTimeMillis(long maxEvictableIdleTimeMillis) {
             this.maxEvictableIdleTimeMillis = maxEvictableIdleTimeMillis;
         }
-
-        private String mapper;
 
         public String getMapper() {
             return mapper;

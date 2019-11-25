@@ -1,11 +1,11 @@
 package com.louislivi.fastdep.test.dao;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class Test implements Serializable {
     private Integer a;
     private Integer b;
+    private Integer c;
 
     @Override
     public String toString() {
@@ -39,6 +39,4 @@ public class Test implements Serializable {
     public void setC(Integer c) {
         this.c = c;
     }
-
-    private Integer c;
 }

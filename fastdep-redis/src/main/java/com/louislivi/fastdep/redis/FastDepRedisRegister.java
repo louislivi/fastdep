@@ -38,12 +38,9 @@ import java.util.function.Supplier;
 public class FastDepRedisRegister implements EnvironmentAware, ImportBeanDefinitionRegistrar {
 
     private static final Logger logger = LoggerFactory.getLogger(FastDepRedisRegister.class);
-
-    private Environment env;
-
-    private Binder binder;
-
     private static Map<String, Object> registerBean = new ConcurrentHashMap<>();
+    private Environment env;
+    private Binder binder;
 
     /**
      * ImportBeanDefinitionRegistrar
@@ -84,7 +81,8 @@ public class FastDepRedisRegister implements EnvironmentAware, ImportBeanDefinit
                 if (pool.getMaxWait() != null) {
                     genericObjectPoolConfig.setMaxWaitMillis(pool.getMaxWait().toMillis());
                 }
-            } catch (NoSuchElementException ignore) {}
+            } catch (NoSuchElementException ignore) {
+            }
             //LettuceConnectionFactory
             Supplier<LettuceConnectionFactory> lettuceConnectionFactorySupplier = () -> {
                 LettuceConnectionFactory factory = (LettuceConnectionFactory) registerBean.get(key + "LettuceConnectionFactory");
@@ -97,7 +95,8 @@ public class FastDepRedisRegister implements EnvironmentAware, ImportBeanDefinit
                     if (shutdownTimeout != null) {
                         builder.shutdownTimeout(shutdownTimeout);
                     }
-                } catch (NoSuchElementException ignore) {}
+                } catch (NoSuchElementException ignore) {
+                }
                 LettuceClientConfiguration clientConfiguration = builder.poolConfig(genericObjectPoolConfig).build();
                 factory = new LettuceConnectionFactory(configuration, clientConfiguration);
                 registerBean.put(key + "LettuceConnectionFactory", factory);

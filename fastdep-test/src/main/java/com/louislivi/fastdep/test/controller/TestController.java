@@ -34,7 +34,7 @@ public class TestController {
     @Autowired
     private StringRedisTemplate redis2StringRedisTemplate;
 
-//    @Transactional
+    //    @Transactional
     @GetMapping("test")
     public String test() {
         PageHelper.startPage(1, 1);
@@ -44,7 +44,7 @@ public class TestController {
         PageHelper.startPage(1, 2);
         List<Test> tests = testMapper.selectAll();
         PageInfo<Test> testPageInfo = new PageInfo<>(tests);
-        System.out.println(testPageInfo) ;
+        System.out.println(testPageInfo);
         return JSONObject.toJSONString(testPageInfo);
 //        UserRequestData userRequestData1 = new UserRequestData();
 //        userRequestData1.setUserId(11L);
