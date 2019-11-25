@@ -2,6 +2,7 @@ package com.louislivi.fastdep.redis;
 
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
@@ -9,7 +10,11 @@ import org.springframework.context.annotation.Import;
  * @author : louislivi
  */
 @Configuration
+@EnableConfigurationProperties({FastDepRedis.class})
 @AutoConfigureBefore({RedisAutoConfiguration.class})
-@Import({FastDepRedisRegister.class, FastDepRestTemplateConfig.class})
+@Import({
+//        FastDepRedisRegister.class,
+        Test.class
+})
 public class FastDepRedisAutoConfiguration {
 }

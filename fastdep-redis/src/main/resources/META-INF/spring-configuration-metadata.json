@@ -1,0 +1,17 @@
+{
+  "groups": [
+    {
+      "name": "fastdep.redis",
+      "type": "com.louislivi.fastdep.redis.FastDepRedis",
+      "sourceType": "com.louislivi.fastdep.redis.FastDepRedis"
+    }
+  ],
+  "properties": [
+    {
+      "name": "fastdep.redis",
+      "type": "java.util.Map<java.lang.String,org.springframework.boot.autoconfigure.data.redis.RedisProperties>",
+      "sourceType": "com.louislivi.fastdep.redis.FastDepRedis"
+    }
+  ],
+  "hints": []
+}
