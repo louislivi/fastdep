@@ -73,19 +73,19 @@ public class FastDepDataSourceRegister implements EnvironmentAware, ImportBeanDe
                 if (registerDataSource != null) {
                     return registerDataSource;
                 }
-                AtomikosDataSourceBean ds = new AtomikosDataSourceBean();
+                registerDataSource = new AtomikosDataSourceBean();
                 FastDepXaProperties fastDepXaProperties = new FastDepXaProperties(env, key);
                 Properties properties = fastDepXaProperties.getProperties();
-                ds.setXaDataSourceClassName("com.alibaba.druid.pool.xa.DruidXADataSource");
-                ds.setUniqueResourceName(key);
-                ds.setMinPoolSize(fastDepXaProperties.getMinPoolSize());
-                ds.setMaxPoolSize(fastDepXaProperties.getMaxPoolSize());
-                ds.setBorrowConnectionTimeout(fastDepXaProperties.getBorrowConnectionTimeout());
-                ds.setMaxIdleTime(fastDepXaProperties.getMaxIdleTime());
-                ds.setTestQuery(fastDepXaProperties.getTestQuery());
-                ds.setXaProperties(properties);
-                registerBean.put(key + "DataSource", ds);
-                return ds;
+                registerDataSource.setXaDataSourceClassName("com.alibaba.druid.pool.xa.DruidXADataSource");
+                registerDataSource.setUniqueResourceName(key);
+                registerDataSource.setMinPoolSize(fastDepXaProperties.getMinPoolSize());
+                registerDataSource.setMaxPoolSize(fastDepXaProperties.getMaxPoolSize());
+                registerDataSource.setBorrowConnectionTimeout(fastDepXaProperties.getBorrowConnectionTimeout());
+                registerDataSource.setMaxIdleTime(fastDepXaProperties.getMaxIdleTime());
+                registerDataSource.setTestQuery(fastDepXaProperties.getTestQuery());
+                registerDataSource.setXaProperties(properties);
+                registerBean.put(key + "DataSource", registerDataSource);
+                return registerDataSource;
             };
             DataSource dataSource = dataSourceSupplier.get();
             BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(DataSource.class, dataSourceSupplier);
@@ -104,9 +104,9 @@ public class FastDepDataSourceRegister implements EnvironmentAware, ImportBeanDe
                     fb.setTypeAliasesPackage(env.getProperty("mybatis.typeAliasesPackage"));
                     // mybatis.mapper-locations
                     fb.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(env.getProperty("mybatis.mapper-locations")));
-                    SqlSessionFactory object = fb.getObject();
-                    registerBean.put(key + "SqlSessionFactory", object);
-                    return object;
+                    registerSqlSessionFactory = fb.getObject();
+                    registerBean.put(key + "SqlSessionFactory", registerSqlSessionFactory);
+                    return registerSqlSessionFactory;
                 } catch (Exception e) {
                     logger.error("", e);
                 }

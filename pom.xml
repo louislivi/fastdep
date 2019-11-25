@@ -22,7 +22,6 @@
         <gpg.skip>false</gpg.skip>
         <jdk.version>1.8</jdk.version>
         <javadoc.skip>false</javadoc.skip>
-        <junit.version>4.11</junit.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 

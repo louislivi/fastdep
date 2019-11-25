@@ -7,14 +7,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 /**
+ * FastDepRedisAutoConfiguration
+ *
  * @author : louislivi
  */
 @Configuration
 @EnableConfigurationProperties({FastDepRedis.class})
 @AutoConfigureBefore({RedisAutoConfiguration.class})
-@Import({
-//        FastDepRedisRegister.class,
-        Test.class
-})
+@Import(FastDepRedisRegister.class)
 public class FastDepRedisAutoConfiguration {
 }

@@ -7,6 +7,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import java.util.Map;
 
 /**
+ * FastDepRedis
+ *
  * @author : louislivi
  */
 @ConditionalOnProperty("fastdep.redis")
