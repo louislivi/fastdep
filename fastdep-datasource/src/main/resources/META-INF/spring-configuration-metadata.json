@@ -1,0 +1,17 @@
+{
+  "groups": [
+    {
+      "name": "fastdep.datasource",
+      "type": "com.louislivi.fastdep.datasource.FastDepDataSource",
+      "sourceType": "com.louislivi.fastdep.datasource.FastDepDataSource"
+    }
+  ],
+  "properties": [
+    {
+      "name": "fastdep.datasource",
+      "type": "java.util.Map<java.lang.String,com.louislivi.fastdep.datasource.FastDepDataSource$DataSource>",
+      "sourceType": "com.louislivi.fastdep.datasource.FastDepDataSource"
+    }
+  ],
+  "hints": []
+}

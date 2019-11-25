@@ -12,7 +12,6 @@ public interface UserRequestDataMapper {
 
     UserRequestData selectByPrimaryKey(Long userId);
 
-//    @DataSource
     List<UserRequestData> selectAll();
 
     List<UserRequestData> selectOptions();
