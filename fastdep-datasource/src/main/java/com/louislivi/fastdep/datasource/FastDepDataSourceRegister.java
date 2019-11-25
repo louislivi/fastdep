@@ -84,10 +84,10 @@ public class FastDepDataSourceRegister implements EnvironmentAware, ImportBeanDe
                 ds.setMaxIdleTime(fastDepXaProperties.getMaxIdleTime());
                 ds.setTestQuery(fastDepXaProperties.getTestQuery());
                 ds.setXaProperties(properties);
+                registerBean.put(key + "DataSource", ds);
                 return ds;
             };
             DataSource dataSource = dataSourceSupplier.get();
-            registerBean.put(key + "DataSource", dataSource);
             BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(DataSource.class, dataSourceSupplier);
             AbstractBeanDefinition datasourceBean = builder.getRawBeanDefinition();
             datasourceBean.setDependsOn("txManager");
@@ -104,14 +104,15 @@ public class FastDepDataSourceRegister implements EnvironmentAware, ImportBeanDe
                     fb.setTypeAliasesPackage(env.getProperty("mybatis.typeAliasesPackage"));
                     // mybatis.mapper-locations
                     fb.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(env.getProperty("mybatis.mapper-locations")));
-                    return fb.getObject();
+                    SqlSessionFactory object = fb.getObject();
+                    registerBean.put(key + "SqlSessionFactory", object);
+                    return object;
                 } catch (Exception e) {
                     logger.error("", e);
                 }
                 return null;
             };
             SqlSessionFactory sqlSessionFactory = sqlSessionFactorySupplier.get();
-            registerBean.put(key + "SqlSessionFactory", sqlSessionFactory);
             BeanDefinitionBuilder builder2 = BeanDefinitionBuilder.genericBeanDefinition(SqlSessionFactory.class, sqlSessionFactorySupplier);
             BeanDefinition sqlSessionFactoryBean = builder2.getRawBeanDefinition();
             beanDefinitionRegistry.registerBeanDefinition(key + "SqlSessionFactory", sqlSessionFactoryBean);
