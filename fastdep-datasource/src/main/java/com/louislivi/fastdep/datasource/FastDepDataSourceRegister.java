@@ -25,6 +25,7 @@ import javax.sql.DataSource;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Properties;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 
 /**
@@ -37,6 +38,8 @@ public class FastDepDataSourceRegister implements EnvironmentAware, ImportBeanDe
 
     private static final Logger logger = LoggerFactory.getLogger(FastDepDataSourceRegister.class);
     private final static ConfigurationPropertyNameAliases ALIASES = new ConfigurationPropertyNameAliases();
+
+    private static Map<String, Object> registerBean = new ConcurrentHashMap<>();
 
     static {
         ALIASES.addAliases("url", "jdbc-url");
@@ -65,6 +68,11 @@ public class FastDepDataSourceRegister implements EnvironmentAware, ImportBeanDe
         for (String key : multipleDataSources.keySet()) {
             // datasource
             Supplier<DataSource> dataSourceSupplier = () -> {
+                //获取注册数据
+                AtomikosDataSourceBean registerDataSource = (AtomikosDataSourceBean) registerBean.get("key" + "DataSource");
+                if (registerDataSource != null) {
+                    return registerDataSource;
+                }
                 AtomikosDataSourceBean ds = new AtomikosDataSourceBean();
                 FastDepXaProperties fastDepXaProperties = new FastDepXaProperties(env, key);
                 Properties properties = fastDepXaProperties.getProperties();
@@ -79,12 +87,17 @@ public class FastDepDataSourceRegister implements EnvironmentAware, ImportBeanDe
                 return ds;
             };
             DataSource dataSource = dataSourceSupplier.get();
+            registerBean.put(key + "DataSource", dataSource);
             BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(DataSource.class, dataSourceSupplier);
             AbstractBeanDefinition datasourceBean = builder.getRawBeanDefinition();
             datasourceBean.setDependsOn("txManager");
             beanDefinitionRegistry.registerBeanDefinition(key + "DataSource", datasourceBean);
             // sqlSessionFactory
             Supplier<SqlSessionFactory> sqlSessionFactorySupplier = () -> {
+                SqlSessionFactory registerSqlSessionFactory = (SqlSessionFactory) registerBean.get(key + "SqlSessionFactory");
+                if (registerSqlSessionFactory != null) {
+                    return registerSqlSessionFactory;
+                }
                 try {
                     SqlSessionFactoryBean fb = new SqlSessionFactoryBean();
                     fb.setDataSource(dataSource);
@@ -98,6 +111,7 @@ public class FastDepDataSourceRegister implements EnvironmentAware, ImportBeanDe
                 return null;
             };
             SqlSessionFactory sqlSessionFactory = sqlSessionFactorySupplier.get();
+            registerBean.put(key + "SqlSessionFactory", sqlSessionFactory);
             BeanDefinitionBuilder builder2 = BeanDefinitionBuilder.genericBeanDefinition(SqlSessionFactory.class, sqlSessionFactorySupplier);
             BeanDefinition sqlSessionFactoryBean = builder2.getRawBeanDefinition();
             beanDefinitionRegistry.registerBeanDefinition(key + "SqlSessionFactory", sqlSessionFactoryBean);
