@@ -10,12 +10,12 @@
 <dependency>
     <groupId>com.louislivi.fastdep</groupId>
     <artifactId>fastdep-datasource</artifactId>
-    <version>1.0.0</version>
+    <version>${fastDepVersion}</version>
 </dependency>
 ```
 - `Gradle`
  ```groovy
- compile group: 'com.louislivi.fastdep', name: 'fastdep-datasource', version: '1.0.0'
+ compile group: 'com.louislivi.fastdep', name: 'fastdep-datasource', version: '${fastDepVersion}'
 ```
 
 # 配置文件

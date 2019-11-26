@@ -40,8 +40,8 @@ Modules
 -------
 |  Module Name  |  Description  | Include dependency |
 | ------------ | ------------- | ------------------ |
-| fastdep-datasource   | Multiple dataSource | jta+druid+mybatis |
-| fastdep-redis   | Multiple redis dataSource  | redis+redisTemplate |
+| [fastdep-datasource](https://fastdep.louislivi.com/#/module/fastdep-datasource)   | Multiple dataSource | jta+druid+mybatis |
+| [fastdep-redis](https://fastdep.louislivi.com/#/module/fastdep-redis)   | Multiple redis dataSource  | redis+redisTemplate |
 
 Documentation
 -------------

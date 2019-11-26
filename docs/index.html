@@ -7,22 +7,36 @@
     <meta content="Description" name="description">
     <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
           name="viewport">
-    <link href="//unpkg.com/docsify/lib/themes/vue.css" rel="stylesheet">
+    <link href="//unpkg.zhimg.com/docsify/lib/themes/vue.css" rel="stylesheet">
 </head>
 <body>
 <div id="app"></div>
 <script>
+    const version = '1.0.0';
     window.$docsify = {
+        markdown: {
+            smartypants: true,
+            renderer: {
+                code: function (code, infostring, escaped) {
+                    code = code.replace('\$\{fastDepVersion\}', version);
+                    return this.origin.code.apply(this, [code, infostring, escaped]);
+                }
+            }
+        },
         name: 'fastdep',
         repo: 'https://github.com/louislivi/fastdep',
         coverpage: ['/', '/en/'],
         loadSidebar: true,
-        loadNavbar: true
+        loadNavbar: true,
+        alias: {
+            '/.*/_sidebar.md': '/_sidebar.md',
+            '/.*/_navbar.md': '/_navbar.md',
+        }
     }
 </script>
-<script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
-<script src="//unpkg.com/prismjs/components/prism-xml.min.js"></script>
-<script src="//unpkg.com/prismjs/components/prism-groovy.min.js"></script>
-<script src="//unpkg.com/prismjs/components/prism-yaml.min.js"></script>
+<script src="//unpkg.zhimg.com/docsify/lib/docsify.min.js"></script>
+<script src="//unpkg.zhimg.com/prismjs/components/prism-groovy.min.js"></script>
+<script src="//unpkg.zhimg.com/prismjs/components/prism-yaml.min.js"></script>
+<script src="//unpkg.zhimg.com/prismjs/components/prism-java.min.js"></script>
 </body>
 </html>

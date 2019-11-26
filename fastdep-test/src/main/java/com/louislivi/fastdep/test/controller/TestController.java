@@ -7,6 +7,7 @@ import com.louislivi.fastdep.test.dao.Test;
 import com.louislivi.fastdep.test.dao.UserRequestData;
 import com.louislivi.fastdep.test.mapper.douyin.UserRequestDataMapper;
 import com.louislivi.fastdep.test.mapper.test.TestMapper;
+import com.louislivi.fastdep.test.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +35,13 @@ public class TestController {
     @Autowired
     private StringRedisTemplate redis2StringRedisTemplate;
 
+    @Autowired
+    private RedisUtil redisUtil;
+
+    /**
+     * datasource test
+     * @return
+     */
     //    @Transactional
     @GetMapping("test")
     public String test() {
@@ -53,9 +61,14 @@ public class TestController {
 //        testMapper.insert();
     }
 
+    /**
+     * redis test
+     */
     @GetMapping("redis")
     public void redis() {
         System.out.println(redis1StringRedisTemplate.opsForValue().get("test"));
         System.out.println(redis2StringRedisTemplate.opsForValue().get("test"));
+        System.out.println(redisUtil.redisTemplate("redis1").opsForValue().get("test"));
+        System.out.println(redisUtil.stringRedisTemplate("redis2").opsForValue().get("test"));
     }
 }

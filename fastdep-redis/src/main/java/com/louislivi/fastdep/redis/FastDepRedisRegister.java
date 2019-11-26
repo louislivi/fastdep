@@ -20,6 +20,7 @@ import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceClientConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.connection.lettuce.LettucePoolingClientConfiguration;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.util.StringUtils;
 
@@ -107,6 +108,7 @@ public class FastDepRedisRegister implements EnvironmentAware, ImportBeanDefinit
             AbstractBeanDefinition factoryBean = builder.getRawBeanDefinition();
             factoryBean.setPrimary(onPrimary);
             beanDefinitionRegistry.registerBeanDefinition(key + "LettuceConnectionFactory", factoryBean);
+            // StringRedisTemplate
             GenericBeanDefinition stringRedisTemplate = new GenericBeanDefinition();
             stringRedisTemplate.setBeanClass(StringRedisTemplate.class);
             ConstructorArgumentValues constructorArgumentValues = new ConstructorArgumentValues();
@@ -114,6 +116,12 @@ public class FastDepRedisRegister implements EnvironmentAware, ImportBeanDefinit
             stringRedisTemplate.setConstructorArgumentValues(constructorArgumentValues);
             stringRedisTemplate.setAutowireMode(AutowireCapableBeanFactory.AUTOWIRE_BY_NAME);
             beanDefinitionRegistry.registerBeanDefinition(key + "StringRedisTemplate", stringRedisTemplate);
+            // RedisTemplate
+            GenericBeanDefinition redisTemplate = new GenericBeanDefinition();
+            redisTemplate.setBeanClass(RedisTemplate.class);
+            redisTemplate.getPropertyValues().add("connectionFactory", lettuceConnectionFactory);
+            redisTemplate.setAutowireMode(AutowireCapableBeanFactory.AUTOWIRE_BY_NAME);
+            beanDefinitionRegistry.registerBeanDefinition(key + "RedisTemplate", redisTemplate);
             logger.info("Registration redis ({}) !", key);
             if (onPrimary) {
                 onPrimary = false;

@@ -39,8 +39,8 @@ fastdep
 -------
 |  模块名称  |  描述  | 引入的依赖 |
 | ------------ | ------------- | ------------------ |
-| fastdep-datasource   | 多数据源 | jta+druid+mybatis |
-| fastdep-redis   | Redis多数据源  | redis+redisTemplate |
+| [fastdep-datasource](https://fastdep.louislivi.com/#/module/fastdep-datasource)   | 多数据源 | jta+druid+mybatis |
+| [fastdep-redis](https://fastdep.louislivi.com/#/module/fastdep-redis)   | Redis多数据源  | redis+redisTemplate |
 
 文档
 -------
