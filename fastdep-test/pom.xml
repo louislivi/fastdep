@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.0.RELEASE</version>
+        <version>2.1.5.RELEASE</version>
     </parent>
 
     <groupId>com.louislivi.fastdep</groupId>
@@ -17,7 +17,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>2.0.0.RELEASE</version>
+            <version>2.1.5.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -27,12 +27,12 @@
         <dependency>
             <groupId>com.louislivi.fastdep</groupId>
             <artifactId>fastdep-datasource</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.louislivi.fastdep</groupId>
             <artifactId>fastdep-redis</artifactId>
-            <version>1.0.0</version>
+            <version>1.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>

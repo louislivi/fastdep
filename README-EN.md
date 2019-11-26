@@ -28,12 +28,12 @@ If you want to bootstrap fastdep, you'll need:
     <dependency>
         <groupId>com.louislivi.fastdep</groupId>
         <artifactId>${Module Name}</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </dependency>
     ```
     - Gradle
     ```groovy
-    compile group: 'com.louislivi.fastdep', name: '${Module Name}', version: '1.0.0'
+    compile group: 'com.louislivi.fastdep', name: '${Module Name}', version: '1.0.1'
     ```
   
 Modules
