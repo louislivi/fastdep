@@ -1,6 +1,7 @@
 package com.louislivi.fastdep.datasource;
 
 import com.atomikos.jdbc.AtomikosDataSourceBean;
+import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
+import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.boot.context.properties.bind.Binder;
 import org.springframework.boot.context.properties.source.ConfigurationPropertyNameAliases;
 import org.springframework.context.EnvironmentAware;
@@ -104,6 +106,11 @@ public class FastDepDataSourceRegister implements EnvironmentAware, ImportBeanDe
                     fb.setTypeAliasesPackage(env.getProperty("mybatis.typeAliasesPackage"));
                     // mybatis.mapper-locations
                     fb.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(env.getProperty("mybatis.mapper-locations")));
+                    // mybatis.configuration
+                    BindResult<Configuration> bindConfiguration = binder.bind("mybatis.configuration", Configuration.class);
+                    if (bindConfiguration.isBound()) {
+                        fb.setConfiguration(bindConfiguration.get());
+                    }
                     registerSqlSessionFactory = fb.getObject();
                     registerBean.put(key + "SqlSessionFactory", registerSqlSessionFactory);
                     return registerSqlSessionFactory;
