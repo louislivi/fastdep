@@ -1,5 +1,6 @@
 - [Quick Build](en/README.md#quick-build)
 - [Modules](en/README.md#modules)
-    - [多数据源](module/fastdep-datasource.md)
-    - [Redis多数据源](module/fastdep-redis.md)
+    - [Datasource](module/fastdep-datasource.md)
+    - [RedisDatasource](module/fastdep-redis.md)
+    - [ShiroJWT](module/fastdep-shiro-jwt.md)
 - [License](en/README.md#license)

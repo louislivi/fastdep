@@ -27,20 +27,21 @@ fastdep
     <dependency>
         <groupId>com.louislivi.fastdep</groupId>
         <artifactId>${模块名称}</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
     </dependency>
     ```
     - Gradle
     ```groovy
-    compile group: 'com.louislivi.fastdep', name: '${Module Name}', version: '1.0.1'
+    compile group: 'com.louislivi.fastdep', name: '${Module Name}', version: '1.0.2'
     ```
   
 模块
 -------
 |  模块名称  |  描述  | 引入的依赖 |
 | ------------ | ------------- | ------------------ |
-| [fastdep-datasource](https://fastdep.louislivi.com/#/module/fastdep-datasource)   | 多数据源 | jta+druid+mybatis |
-| [fastdep-redis](https://fastdep.louislivi.com/#/module/fastdep-redis)   | Redis多数据源  | redis+redisTemplate |
+| [fastdep-datasource](https://fastdep.louislivi.com/#/module/fastdep-datasource)   | 多数据源 | JTA+Druid+Mybatis |
+| [fastdep-redis](https://fastdep.louislivi.com/#/module/fastdep-redis)   | Redis多数据源  | Redis+RedisTemplate |
+| [fastdep-shiro-jwt](https://fastdep.louislivi.com/#/module/fastdep-shiro-jwt)   | ShiroJWT  | Shiro+JWT |
 
 文档
 -------

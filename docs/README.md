@@ -39,8 +39,9 @@
 
 |  模块名称  |  描述  | 引入的依赖 |
 | ------------ | ------------- | ------------------ |
-| [fastdep-datasource](module/fastdep-datasource.md)   | 多数据源 | jta+druid+mybatis |
-|  [fastdep-redis](module/fastdep-redis.md)  | Redis多数据源  | redis+redisTemplate |
+| [fastdep-datasource](module/fastdep-datasource)   | 多数据源 | JTA+Druid+Mybatis |
+| [fastdep-redis](module/fastdep-redis)   | Redis多数据源  | Redis+RedisTemplate |
+| [fastdep-shiro-jwt](module/fastdep-shiro-jwt)   | ShiroJWT  | Shiro+JWT |
 
 
 # 协议

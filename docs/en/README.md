@@ -31,8 +31,9 @@ Modules
 -------
 |  Module Name  |  Description  | Include dependency |
 | ------------ | ------------- | ------------------ |
-| fastdep-datasource   | Multiple dataSource | jta+druid+mybatis |
-| fastdep-redis   | Multiple redis dataSource  | redis+redisTemplate |
+| fastdep-datasource   | Multiple dataSource | JTA+Druid+Mybatis |
+| fastdep-redis   | Multiple redis dataSource  | Redis+RedisTemplate |
+| fastdep-shiro-jwt   | Shiro + JWT  | ShiroJWT |
 
 Documentation
 -------------

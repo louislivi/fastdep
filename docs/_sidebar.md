@@ -3,4 +3,5 @@
 - [模块](README.md#%e6%a8%a1%e5%9d%97)
     - [多数据源](module/fastdep-datasource.md)
     - [Redis多数据源](module/fastdep-redis.md)
+    - [ShiroJWT](module/fastdep-shiro-jwt.md)
 - [协议](README.md#%e5%8d%8f%e8%ae%ae)
