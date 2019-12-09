@@ -5,6 +5,18 @@ mybatis:
   mapper-Locations: classpath:/mapper/**/*.xml
 
 fastdep:
+  shiro-jwt:
+    filter:
+      test:
+        path: /jwt/**
+        role: jwt
+      admin:
+        path: /admin/**
+        role: jwt
+      font:
+        path: /font/**/**
+        role: anon
+    secret: "6Dx8SIuaHXJYnpsG18SSpjPs50lZcT52"
   datasource:
     douyin:
       mapper: com.louislivi.fastdep.test.mapper.douyin

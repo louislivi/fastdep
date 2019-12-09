@@ -20,6 +20,10 @@
         </developer>
     </developers>
 
+    <properties>
+        <apache.commons.version>2.7.0</apache.commons.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

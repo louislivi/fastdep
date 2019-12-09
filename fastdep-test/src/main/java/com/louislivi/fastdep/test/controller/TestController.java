@@ -3,11 +3,14 @@ package com.louislivi.fastdep.test.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.louislivi.fastdep.shirojwt.jwt.JwtUtil;
 import com.louislivi.fastdep.test.dao.Test;
 import com.louislivi.fastdep.test.dao.UserRequestData;
 import com.louislivi.fastdep.test.mapper.douyin.UserRequestDataMapper;
 import com.louislivi.fastdep.test.mapper.test.TestMapper;
 import com.louislivi.fastdep.test.utils.RedisUtil;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,6 +41,9 @@ public class TestController {
     @Autowired
     private RedisUtil redisUtil;
 
+    @Autowired
+    private JwtUtil jwtUtil;
+
     /**
      * datasource test
      * @return
@@ -59,6 +65,18 @@ public class TestController {
 //        userRequestDataMapper.insert(userRequestData1);
 //        int i = 1 / 0;
 //        testMapper.insert();
+    }
+
+    @GetMapping("jwt")
+//    @RequiresPermissions("96020691449")
+    @RequiresAuthentication
+    public String jwt() {
+        return "ok!";
+    }
+
+    @GetMapping("token")
+    public String token() {
+        return jwtUtil.sign("123");
     }
 
     /**

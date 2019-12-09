@@ -1,0 +1,62 @@
+{
+  "groups": [
+    {
+      "name": "fastdep.shiro-jwt",
+      "type": "com.louislivi.fastdep.shirojwt.FastDepShiroJwt",
+      "sourceType": "com.louislivi.fastdep.shirojwt.FastDepShiroJwt"
+    }
+  ],
+  "properties": [
+    {
+      "name": "fastdep.shiro-jwt.filter",
+      "type": "java.util.Map<java.lang.String,com.louislivi.fastdep.shirojwt.FastDepShiroJwt.ShiroRole>",
+      "sourceType": "com.louislivi.fastdep.shirojwt.FastDepShiroJwt"
+    },
+    {
+      "name": "fastdep.shiro-jwt.secret",
+      "type": "java.lang.String",
+      "sourceType": "com.louislivi.fastdep.shirojwt.FastDepShiroJwt"
+    },
+    {
+      "name": "fastdep.shiro-jwt.loginUrl",
+      "type": "java.lang.String",
+      "sourceType": "com.louislivi.fastdep.shirojwt.FastDepShiroJwt"
+    },
+    {
+      "name": "fastdep.shiro-jwt.successUrl",
+      "type": "java.lang.String",
+      "sourceType": "com.louislivi.fastdep.shirojwt.FastDepShiroJwt"
+    },
+    {
+      "name": "fastdep.shiro-jwt.unauthorizedUrl",
+      "type": "java.lang.String",
+      "sourceType": "com.louislivi.fastdep.shirojwt.FastDepShiroJwt"
+    },
+    {
+      "name": "fastdep.shiro-jwt.filterChainDefinitions",
+      "type": "java.lang.String",
+      "sourceType": "com.louislivi.fastdep.shirojwt.FastDepShiroJwt"
+    },
+    {
+      "name": "fastdep.shiro-jwt.expireTime",
+      "type": "java.lang.Long",
+      "sourceType": "com.louislivi.fastdep.shirojwt.FastDepShiroJwt"
+    },
+    {
+      "name": "fastdep.shiro-jwt.prefix",
+      "type": "java.lang.String",
+      "sourceType": "com.louislivi.fastdep.shirojwt.FastDepShiroJwt"
+    },
+    {
+      "name": "fastdep.shiro-jwt.signPrefix",
+      "type": "java.lang.String",
+      "sourceType": "com.louislivi.fastdep.shirojwt.FastDepShiroJwt"
+    },
+    {
+      "name": "fastdep.shiro-jwt.header",
+      "type": "java.lang.String",
+      "sourceType": "com.louislivi.fastdep.shirojwt.FastDepShiroJwt"
+    }
+  ],
+  "hints": []
+}
