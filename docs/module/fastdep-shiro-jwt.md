@@ -27,8 +27,8 @@ fastdep:
       admin:
         path: /admin/**
         role: jwt # jwt为需要进行token校验
-      font:
-        path: /font/**/**
+      front:
+        path: /front/**/**
         role: anon # anon为无需校验
     secret: "6Dx8SIuaHXJYnpsG18SSpjPs50lZcT52" # jwt秘钥
 #    expireTime: 7200000 # token有效期
@@ -56,6 +56,8 @@ public class FastDepShiroJwtConfig extends FastDepShiroJwtAuthorization {
         // 查询该用户下的所有权限（当前为示例仅查询用户ID真实环境替换为用户的权限值）
         Set<String> collect = userRequestDataMapper.selectOptions().stream().map(u -> u.getUserId().toString()).collect(Collectors.toSet());
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
+        System.out.println(collect);
+        // 当前值为 [1]
         // 添加用户权限到SimpleAuthorizationInfo中
         simpleAuthorizationInfo.addStringPermissions(collect);
         return simpleAuthorizationInfo;
@@ -74,7 +76,7 @@ public class TestController {
      * 当前为示例所以直接返回了token，真实环境为校验登录信息后再返回token即可
      * @author : louislivi
      */
-    @GetMapping("login")
+    @GetMapping("front/login")
     public String login() {
         // ...校验登录信息是否正确
         // 传入用户唯一标示

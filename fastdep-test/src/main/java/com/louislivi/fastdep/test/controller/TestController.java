@@ -67,16 +67,16 @@ public class TestController {
 //        testMapper.insert();
     }
 
-    @GetMapping("jwt")
-//    @RequiresPermissions("96020691449")
-    @RequiresAuthentication
+    @GetMapping("admin")
+    @RequiresPermissions("1")
+//    @RequiresAuthentication
     public String jwt() {
         return "ok!";
     }
 
-    @GetMapping("token")
+    @GetMapping("front/login")
     public String token() {
-        return jwtUtil.sign("123");
+        return jwtUtil.sign("1");
     }
 
     /**

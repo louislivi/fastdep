@@ -24,6 +24,8 @@ public class FastDepShiroJwtConfig extends FastDepShiroJwtAuthorization {
     public SimpleAuthorizationInfo getAuthorizationInfo(String userId) {
         Set<String> collect = userRequestDataMapper.selectOptions().stream().map(u -> u.getUserId().toString()).collect(Collectors.toSet());
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
+        System.out.println(collect);
+        // 当前值为 [1]
         simpleAuthorizationInfo.addStringPermissions(collect);
         return simpleAuthorizationInfo;
     }

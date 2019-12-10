@@ -7,14 +7,11 @@ mybatis:
 fastdep:
   shiro-jwt:
     filter:
-      test:
-        path: /jwt/**
-        role: jwt
       admin:
         path: /admin/**
         role: jwt
-      font:
-        path: /font/**/**
+      front:
+        path: /front/**/**
         role: anon
     secret: "6Dx8SIuaHXJYnpsG18SSpjPs50lZcT52"
   datasource:
