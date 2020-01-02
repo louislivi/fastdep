@@ -28,7 +28,7 @@ public class FastDepDataSource {
         this.datasource = datasource;
     }
 
-    private static class DataSource extends DruidXADataSource {
+    public static class DataSource extends DruidXADataSource {
         //fix druid  maxEvictableIdleTimeMillis must be grater than minEvictableIdleTimeMillis
         protected volatile long minEvictableIdleTimeMillis;
 

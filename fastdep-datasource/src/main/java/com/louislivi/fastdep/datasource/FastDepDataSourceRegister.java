@@ -71,21 +71,20 @@ public class FastDepDataSourceRegister implements EnvironmentAware, ImportBeanDe
             // datasource
             Supplier<DataSource> dataSourceSupplier = () -> {
                 //获取注册数据
-                AtomikosDataSourceBean registerDataSource = (AtomikosDataSourceBean) registerBean.get("key" + "DataSource");
+                AtomikosDataSourceBean registerDataSource = (AtomikosDataSourceBean) registerBean.get(key + "DataSource");
                 if (registerDataSource != null) {
                     return registerDataSource;
                 }
                 registerDataSource = new AtomikosDataSourceBean();
-                FastDepXaProperties fastDepXaProperties = new FastDepXaProperties(env, key);
-                Properties properties = fastDepXaProperties.getProperties();
+                FastDepDataSource.DataSource fastDepDataSource = binder.bind("fastdep.datasource." + key, FastDepDataSource.DataSource.class).get();
                 registerDataSource.setXaDataSourceClassName("com.alibaba.druid.pool.xa.DruidXADataSource");
                 registerDataSource.setUniqueResourceName(key);
-                registerDataSource.setMinPoolSize(fastDepXaProperties.getMinPoolSize());
-                registerDataSource.setMaxPoolSize(fastDepXaProperties.getMaxPoolSize());
-                registerDataSource.setBorrowConnectionTimeout(fastDepXaProperties.getBorrowConnectionTimeout());
-                registerDataSource.setMaxIdleTime(fastDepXaProperties.getMaxIdleTime());
-                registerDataSource.setTestQuery(fastDepXaProperties.getTestQuery());
-                registerDataSource.setXaProperties(properties);
+                registerDataSource.setMinPoolSize(fastDepDataSource.getMinIdle());
+                registerDataSource.setMaxPoolSize(fastDepDataSource.getMaxActive());
+                registerDataSource.setBorrowConnectionTimeout((int) fastDepDataSource.getTimeBetweenEvictionRunsMillis());
+                registerDataSource.setMaxIdleTime((int) fastDepDataSource.getMaxEvictableIdleTimeMillis());
+                registerDataSource.setTestQuery(fastDepDataSource.getValidationQuery());
+                registerDataSource.setXaDataSource(fastDepDataSource);
                 registerBean.put(key + "DataSource", registerDataSource);
                 return registerDataSource;
             };
