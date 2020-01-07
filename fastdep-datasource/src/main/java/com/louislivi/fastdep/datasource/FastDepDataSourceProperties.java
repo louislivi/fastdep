@@ -13,11 +13,11 @@ import java.util.Map;
  */
 @ConditionalOnProperty("fastdep.datasource")
 @ConfigurationProperties("fastdep")
-public class FastDepDataSource {
+public class FastDepDataSourceProperties {
 
     private Map<String, DataSource> datasource;
 
-    public FastDepDataSource() {
+    public FastDepDataSourceProperties() {
     }
 
     public Map<String, DataSource> getDatasource() {

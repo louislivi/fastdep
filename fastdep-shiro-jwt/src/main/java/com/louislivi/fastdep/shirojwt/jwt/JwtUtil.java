@@ -5,7 +5,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.louislivi.fastdep.shirojwt.FastDepShiroJwt;
+import com.louislivi.fastdep.shirojwt.FastDepShiroJwtProperties;
 import com.louislivi.fastdep.shirojwt.shiro.FastDepShiroJwtAuthorization;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 
@@ -23,7 +23,7 @@ import static org.apache.shiro.SecurityUtils.getSubject;
 @ConditionalOnMissingBean(JwtUtil.class)
 public class JwtUtil {
     @Resource
-    public FastDepShiroJwt fastDepShiroJwt;
+    public FastDepShiroJwtProperties fastDepShiroJwtProperties;
     @Resource
     public FastDepShiroJwtAuthorization fastDepShiroJwtAuthorization;
 
@@ -35,7 +35,7 @@ public class JwtUtil {
      */
     public boolean verify(String token, String userId) {
         try {
-            String secret = fastDepShiroJwtAuthorization.getSecret(userId) == null ? fastDepShiroJwt.getSecret() : null;
+            String secret = fastDepShiroJwtAuthorization.getSecret(userId) == null ? fastDepShiroJwtProperties.getSecret() : null;
             assert secret != null;
             Algorithm algorithm = Algorithm.HMAC256(secret);
             JWTVerifier verifier = JWT.require(algorithm)
@@ -84,11 +84,11 @@ public class JwtUtil {
      * @return token
      */
     public String sign(String userId) {
-        Date date = new Date(System.currentTimeMillis() + fastDepShiroJwt.getExpireTime());
-        String secret = fastDepShiroJwtAuthorization.getSecret(userId) == null ? fastDepShiroJwt.getSecret() : null;
+        Date date = new Date(System.currentTimeMillis() + fastDepShiroJwtProperties.getExpireTime());
+        String secret = fastDepShiroJwtAuthorization.getSecret(userId) == null ? fastDepShiroJwtProperties.getSecret() : null;
         assert secret != null;
         Algorithm algorithm = Algorithm.HMAC256(secret);
-        return fastDepShiroJwt.getSignPrefix() + JWT.create()
+        return fastDepShiroJwtProperties.getSignPrefix() + JWT.create()
                 .withSubject(userId)
                 .withExpiresAt(date)
                 .sign(algorithm);

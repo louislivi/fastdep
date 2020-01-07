@@ -26,7 +26,6 @@ import org.springframework.core.type.AnnotationMetadata;
 import javax.sql.DataSource;
 import java.util.Map;
 import java.util.NoSuchElementException;
-import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 
@@ -76,7 +75,7 @@ public class FastDepDataSourceRegister implements EnvironmentAware, ImportBeanDe
                     return registerDataSource;
                 }
                 registerDataSource = new AtomikosDataSourceBean();
-                FastDepDataSource.DataSource fastDepDataSource = binder.bind("fastdep.datasource." + key, FastDepDataSource.DataSource.class).get();
+                FastDepDataSourceProperties.DataSource fastDepDataSource = binder.bind("fastdep.datasource." + key, FastDepDataSourceProperties.DataSource.class).get();
                 registerDataSource.setXaDataSourceClassName("com.alibaba.druid.pool.xa.DruidXADataSource");
                 registerDataSource.setUniqueResourceName(key);
                 registerDataSource.setMinPoolSize(fastDepDataSource.getMinIdle());

@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Import;
  * @author : louislivi
  */
 @Configuration
-@EnableConfigurationProperties({FastDepRedis.class})
+@EnableConfigurationProperties({FastDepRedisProperties.class})
 @AutoConfigureBefore({RedisAutoConfiguration.class})
 @Import(FastDepRedisRegister.class)
 public class FastDepRedisAutoConfiguration {

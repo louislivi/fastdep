@@ -40,6 +40,11 @@
             <version>1.0.2</version>
         </dependency>
         <dependency>
+            <groupId>com.louislivi.fastdep</groupId>
+            <artifactId>fastdep-file</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+        <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.58</version>

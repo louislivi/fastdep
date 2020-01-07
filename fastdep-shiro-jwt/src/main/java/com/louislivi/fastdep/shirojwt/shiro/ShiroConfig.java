@@ -1,6 +1,6 @@
 package com.louislivi.fastdep.shirojwt.shiro;
 
-import com.louislivi.fastdep.shirojwt.FastDepShiroJwt;
+import com.louislivi.fastdep.shirojwt.FastDepShiroJwtProperties;
 import com.louislivi.fastdep.shirojwt.jwt.JwtFilter;
 import com.louislivi.fastdep.shirojwt.jwt.JwtUtil;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
@@ -67,7 +67,7 @@ public class ShiroConfig {
     @Bean("shiroFilter")
     @ConditionalOnMissingBean(ShiroFilter.class)
     public ShiroFilterFactoryBean factory(DefaultWebSecurityManager securityManager, JwtUtil jwtUtil) {
-        FastDepShiroJwt fastDepShiroJwt = jwtUtil.fastDepShiroJwt;
+        FastDepShiroJwtProperties fastDepShiroJwtProperties = jwtUtil.fastDepShiroJwtProperties;
         ShiroFilterFactoryBean factoryBean = new ShiroFilterFactoryBean();
         // define your filter and name it as jwt
         Map<String, Filter> filterMap = new HashMap<>(1);
@@ -78,19 +78,19 @@ public class ShiroConfig {
          * difine custom URL rule
          * http://shiro.apache.org/web.html#urls-
          */
-        Map<String, FastDepShiroJwt.ShiroRole> filter = fastDepShiroJwt.getFilter();
+        Map<String, FastDepShiroJwtProperties.ShiroRole> filter = fastDepShiroJwtProperties.getFilter();
         if (filter.size() > 0) {
             Map<String, String> filterRuleMap = filter.values().stream().
-                    collect(Collectors.toMap(FastDepShiroJwt.ShiroRole::getPath, FastDepShiroJwt.ShiroRole::getRole));
+                    collect(Collectors.toMap(FastDepShiroJwtProperties.ShiroRole::getPath, FastDepShiroJwtProperties.ShiroRole::getRole));
             // 401 and 404 page does not forward to our filter
             factoryBean.setFilterChainDefinitionMap(filterRuleMap);
         }
-        if (fastDepShiroJwt.getFilterChainDefinitions() != null) {
-            factoryBean.setFilterChainDefinitions(fastDepShiroJwt.getFilterChainDefinitions());
+        if (fastDepShiroJwtProperties.getFilterChainDefinitions() != null) {
+            factoryBean.setFilterChainDefinitions(fastDepShiroJwtProperties.getFilterChainDefinitions());
         }
-        factoryBean.setLoginUrl(fastDepShiroJwt.getLoginUrl());
-        factoryBean.setSuccessUrl(fastDepShiroJwt.getSuccessUrl());
-        factoryBean.setUnauthorizedUrl(fastDepShiroJwt.getUnauthorizedUrl());
+        factoryBean.setLoginUrl(fastDepShiroJwtProperties.getLoginUrl());
+        factoryBean.setSuccessUrl(fastDepShiroJwtProperties.getSuccessUrl());
+        factoryBean.setUnauthorizedUrl(fastDepShiroJwtProperties.getUnauthorizedUrl());
         jwtUtil.fastDepShiroJwtAuthorization.shiroFilterFactoryBean(factoryBean);
         return factoryBean;
     }

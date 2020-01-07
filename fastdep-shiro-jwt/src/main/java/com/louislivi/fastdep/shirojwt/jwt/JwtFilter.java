@@ -27,15 +27,15 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
     @Override
     protected boolean isLoginAttempt(ServletRequest request, ServletResponse response) {
         HttpServletRequest req = (HttpServletRequest) request;
-        String authorization = req.getHeader(jwtUtil.fastDepShiroJwt.getHeader());
+        String authorization = req.getHeader(jwtUtil.fastDepShiroJwtProperties.getHeader());
         return authorization != null;
     }
 
     @Override
     protected boolean executeLogin(ServletRequest request, ServletResponse response) throws AuthenticationException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-        String authorization = httpServletRequest.getHeader(jwtUtil.fastDepShiroJwt.getHeader());
-        authorization = authorization.replaceAll("(?i)" + jwtUtil.fastDepShiroJwt.getPrefix(), "");
+        String authorization = httpServletRequest.getHeader(jwtUtil.fastDepShiroJwtProperties.getHeader());
+        authorization = authorization.replaceAll("(?i)" + jwtUtil.fastDepShiroJwtProperties.getPrefix(), "");
         JwtToken token = new JwtToken(authorization);
         //verify token
         String userId = jwtUtil.getUserId(authorization);

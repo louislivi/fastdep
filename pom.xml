@@ -39,6 +39,7 @@
         <module>fastdep-redis</module>
         <module>fastdep-datasource</module>
         <module>fastdep-shiro-jwt</module>
+        <module>fastdep-file</module>
     </modules>
 
     <dependencies>

@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Import;
  * @author : louislivi
  */
 @Configuration
-@EnableConfigurationProperties({FastDepDataSource.class})
+@EnableConfigurationProperties({FastDepDataSourceProperties.class})
 @AutoConfigureBefore({DataSourceAutoConfiguration.class})
 @Import({FastDepDataSourceRegister.class, FastDepAtomikosTransactionConfigure.class})
 public class FastDepDataSourceAutoConfiguration {

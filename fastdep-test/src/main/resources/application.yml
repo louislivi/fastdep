@@ -5,6 +5,11 @@ mybatis:
   mapper-Locations: classpath:/mapper/**/*.xml
 
 fastdep:
+  file:
+    originName: true
+    scheme: http
+    uploadDir: "/{yyyy}/{MM}/{dd}"
+
   shiro-jwt:
     filter:
       admin:

@@ -15,7 +15,7 @@ import java.util.Map;
 @Configuration
 @ConditionalOnProperty("fastdep.shiro-jwt")
 @ConfigurationProperties("fastdep.shiro-jwt")
-public class FastDepShiroJwt {
+public class FastDepShiroJwtProperties {
     /**
      * shiro filter
      */

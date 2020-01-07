@@ -1,0 +1,77 @@
+{
+  "groups": [
+    {
+      "name": "fastdep.file",
+      "type": "com.louislivi.fastdep.file.FastDepFileProperties",
+      "sourceType": "com.louislivi.fastdep.file.FastDepFileProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "fastdep.file.baseDir",
+      "type": "java.lang.String",
+      "sourceType": "com.louislivi.fastdep.file.FastDepFileProperties"
+    },
+    {
+      "name": "fastdep.file.uploadDir",
+      "type": "java.lang.String",
+      "sourceType": "com.louislivi.fastdep.file.FastDepFileProperties"
+    },
+    {
+      "name": "fastdep.file.urlPrefix",
+      "type": "java.lang.String",
+      "sourceType": "com.louislivi.fastdep.file.FastDepFileProperties"
+    },
+    {
+      "name": "fastdep.file.scheme",
+      "type": "com.louislivi.fastdep.file.FastDepFileProperties.Scheme",
+      "sourceType": "com.louislivi.fastdep.file.FastDepFileProperties.scheme"
+    },
+    {
+      "name": "fastdep.file.downloadUrl",
+      "type": "java.lang.String",
+      "sourceType": "com.louislivi.fastdep.file.FastDepFileProperties"
+    },
+    {
+      "name": "fastdep.file.uploadUrl",
+      "type": "java.lang.String",
+      "sourceType": "com.louislivi.fastdep.file.FastDepFileProperties"
+    },
+    {
+      "name": "fastdep.file.fieldName",
+      "type": "java.lang.String",
+      "sourceType": "com.louislivi.fastdep.file.FastDepFileProperties"
+    },
+    {
+      "name": "fastdep.file.originName",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.louislivi.fastdep.file.FastDepFileProperties"
+    },
+    {
+      "name": "fastdep.file.config",
+      "type": "com.louislivi.fastdep.file.FastDepFileProperties.Config",
+      "sourceType": "com.louislivi.fastdep.file.FastDepFileProperties.Config"
+    },
+    {
+      "name": "fastdep.file.config.location",
+      "type": "java.lang.String",
+      "sourceType": "com.louislivi.fastdep.file.FastDepFileProperties.Config"
+    },
+    {
+      "name": "fastdep.file.config.maxFileSize",
+      "type": "java.lang.Long",
+      "sourceType": "com.louislivi.fastdep.file.FastDepFileProperties.Config"
+    },
+    {
+      "name": "fastdep.file.config.maxRequestSize",
+      "type": "java.lang.Long",
+      "sourceType": "com.louislivi.fastdep.file.FastDepFileProperties.Config"
+    },
+    {
+      "name": "fastdep.file.config.fileSizeThreshold",
+      "type": "java.lang.Integer",
+      "sourceType": "com.louislivi.fastdep.file.FastDepFileProperties.Config"
+    }
+  ],
+  "hints": []
+}

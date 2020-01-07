@@ -13,7 +13,7 @@ import java.util.Map;
  */
 @ConditionalOnProperty("fastdep.redis")
 @ConfigurationProperties("fastdep")
-public class FastDepRedis {
+public class FastDepRedisProperties {
     private Map<String, RedisProperties> redis;
 
     public Map<String, RedisProperties> getRedis() {

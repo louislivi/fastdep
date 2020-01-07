@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Import;
  * @author : louislivi
  */
 @Configuration
-@EnableConfigurationProperties({FastDepShiroJwt.class})
+@EnableConfigurationProperties({FastDepShiroJwtProperties.class})
 @Import({ShiroConfig.class, JwtUtil.class, FastDepShiroJwtAuthorization.class})
 public class FastDepShiroJwtAutoConfiguration {
 }
