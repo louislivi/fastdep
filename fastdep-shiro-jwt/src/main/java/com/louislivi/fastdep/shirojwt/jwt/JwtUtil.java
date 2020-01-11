@@ -31,6 +31,7 @@ public class JwtUtil {
      * verify token
      *
      * @param token token
+     * @param userId userId
      * @return true or false
      */
     public boolean verify(String token, String userId) {
