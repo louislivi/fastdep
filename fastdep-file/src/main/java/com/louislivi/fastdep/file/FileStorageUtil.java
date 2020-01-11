@@ -70,7 +70,7 @@ public class FileStorageUtil {
      * @param fileName file name
      * @param request  http request
      * @param response http response
-     * @throws IOException
+     * @throws IOException io
      */
     public void downloadFile(String fileName, HttpServletRequest request, HttpServletResponse response) throws IOException {
         // Load file as Resource
@@ -98,9 +98,9 @@ public class FileStorageUtil {
 
     /**
      * readInputStream to OutStream
-     * @param inStream
-     * @param outStream
-     * @throws IOException
+     * @param inStream in stream
+     * @param outStream out Stream
+     * @throws IOException io
      */
     private void readInputStreamToOutStream(InputStream inStream, OutputStream outStream) throws IOException {
         byte[] buffer = new byte[1024];
@@ -115,7 +115,7 @@ public class FileStorageUtil {
     /**
      * Construction
      *
-     * @param fastDepFileProperties
+     * @param fastDepFileProperties fastDepFileProperties
      */
     public FileStorageUtil(FastDepFileProperties fastDepFileProperties) {
         this.fastDepFileProperties = fastDepFileProperties;
@@ -157,7 +157,7 @@ public class FileStorageUtil {
     /**
      * uuid
      *
-     * @return
+     * @return uuid
      */
     public static String uuid() {
         String s = UUID.randomUUID().toString();
@@ -167,7 +167,7 @@ public class FileStorageUtil {
     /**
      * save file
      * @param file file
-     * @return
+     * @return file name
      */
     public String storeFile(MultipartFile file) {
         // Normalize file name
@@ -193,8 +193,8 @@ public class FileStorageUtil {
     /**
      * Load file resource
      *
-     * @param fileName
-     * @return
+     * @param fileName file name
+     * @return resource
      */
     public Resource loadFileAsResource(String fileName) {
         try {
