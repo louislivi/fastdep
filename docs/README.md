@@ -42,6 +42,7 @@
 | [fastdep-datasource](module/fastdep-datasource)   | 多数据源 | JTA+Druid+Mybatis |
 | [fastdep-redis](module/fastdep-redis)   | Redis多数据源  | Redis+RedisTemplate |
 | [fastdep-shiro-jwt](module/fastdep-shiro-jwt)   | ShiroJWT  | Shiro+JWT |
+| [fastdep-file](module/fastdep-file)   | 文件上传下载  | 无 |
 
 
 # 协议

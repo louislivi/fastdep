@@ -27,22 +27,22 @@
         <dependency>
             <groupId>com.louislivi.fastdep</groupId>
             <artifactId>fastdep-datasource</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.3</version>
         </dependency>
         <dependency>
             <groupId>com.louislivi.fastdep</groupId>
             <artifactId>fastdep-redis</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.3</version>
         </dependency>
         <dependency>
             <groupId>com.louislivi.fastdep</groupId>
             <artifactId>fastdep-shiro-jwt</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.3</version>
         </dependency>
         <dependency>
             <groupId>com.louislivi.fastdep</groupId>
             <artifactId>fastdep-file</artifactId>
-            <version>1.0.2</version>
+            <version>1.0.3</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>

@@ -4,4 +4,5 @@
     - [多数据源](module/fastdep-datasource.md)
     - [Redis多数据源](module/fastdep-redis.md)
     - [ShiroJWT](module/fastdep-shiro-jwt.md)
+    - [文件上传下载](module/fastdep-file.md)
 - [协议](README.md#%e5%8d%8f%e8%ae%ae)

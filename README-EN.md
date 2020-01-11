@@ -28,12 +28,12 @@ If you want to bootstrap fastdep, you'll need:
     <dependency>
         <groupId>com.louislivi.fastdep</groupId>
         <artifactId>${Module Name}</artifactId>
-        <version>1.0.2</version>
+        <version>1.0.3</version>
     </dependency>
     ```
     - Gradle
     ```groovy
-    compile group: 'com.louislivi.fastdep', name: '${Module Name}', version: '1.0.2'
+    compile group: 'com.louislivi.fastdep', name: '${Module Name}', version: '1.0.3'
     ```
   
 Modules
@@ -42,6 +42,8 @@ Modules
 | ------------ | ------------- | ------------------ |
 | [fastdep-datasource](https://fastdep.louislivi.com/#/module/fastdep-datasource)   | Multiple dataSource | jta+druid+mybatis |
 | [fastdep-redis](https://fastdep.louislivi.com/#/module/fastdep-redis)   | Multiple redis dataSource  | redis+redisTemplate |
+| [fastdep-shiro-jwt](https://fastdep.louislivi.com/#/module/fastdep-shiro-jwt)   | ShiroJWT  | Shiro+JWT |
+| [fastdep-file](https://fastdep.louislivi.com/#/module/fastdep-file)   | File upload & download  | None |
 
 Documentation
 -------------

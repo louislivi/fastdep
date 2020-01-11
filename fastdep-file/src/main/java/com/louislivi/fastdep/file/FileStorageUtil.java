@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
+import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -73,6 +74,7 @@ public class FileStorageUtil {
      */
     public void downloadFile(String fileName, HttpServletRequest request, HttpServletResponse response) throws IOException {
         // Load file as Resource
+        fileName = URLDecoder.decode(fileName, "UTF-8");
         Resource resource = this.loadFileAsResource(fileName);
 
         // Try to determine file's content type
