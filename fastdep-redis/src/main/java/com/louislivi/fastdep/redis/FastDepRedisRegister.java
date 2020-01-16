@@ -64,10 +64,10 @@ public class FastDepRedisRegister implements EnvironmentAware, ImportBeanDefinit
             Map map = binder.bind("fastdep.redis." + key, Map.class).get();
             // RedisStandaloneConfiguration
             RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration();
-            configuration.setHostName((String) map.get("host"));
-            configuration.setPort((Integer) map.get("port"));
-            configuration.setDatabase((Integer) map.get("database"));
-            String password = (String) map.get("password");
+            configuration.setHostName(String.valueOf(map.get("host")));
+            configuration.setPort(Integer.parseInt(String.valueOf(map.get("port"))));
+            configuration.setDatabase(Integer.parseInt(String.valueOf(map.get("database"))));
+            String password = String.valueOf(map.get("password"));
             if (!StringUtils.isEmpty(password)) {
                 RedisPassword redisPassword = RedisPassword.of(password);
                 configuration.setPassword(redisPassword);
