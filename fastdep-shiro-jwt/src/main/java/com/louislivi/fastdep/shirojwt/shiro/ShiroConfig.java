@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Bean;
 
 import javax.servlet.Filter;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -80,8 +81,9 @@ public class ShiroConfig {
          */
         Map<String, FastDepShiroJwtProperties.ShiroRole> filter = fastDepShiroJwtProperties.getFilter();
         if (filter.size() > 0) {
-            Map<String, String> filterRuleMap = filter.values().stream().
-                    collect(Collectors.toMap(FastDepShiroJwtProperties.ShiroRole::getPath, FastDepShiroJwtProperties.ShiroRole::getRole));
+            LinkedHashMap<String, String> filterRuleMap = filter.values().stream().
+                    collect(Collectors.toMap(FastDepShiroJwtProperties.ShiroRole::getPath,
+                            FastDepShiroJwtProperties.ShiroRole::getRole, (key1, key2) -> key2, LinkedHashMap::new));
             // 401 and 404 page does not forward to our filter
             factoryBean.setFilterChainDefinitionMap(filterRuleMap);
         }
