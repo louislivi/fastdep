@@ -23,7 +23,7 @@ fastdep:
     douyin:
       mapper: com.louislivi.fastdep.test.mapper.douyin
       password: 123456
-      url: jdbc:mysql://192.168.12.88:3306/douyin?serverTimezone=Asia/Chongqing&useLegacyDatetimeCode=false&nullNamePatternMatchesAll=true&zeroDateTimeBehavior=CONVERT_TO_NULL&tinyInt1isBit=false&autoReconnect=true&useSSL=false&pinGlobalTxToPhysicalConnection=true
+      url: jdbc:mysql://192.168.31.83:3306/douyin?serverTimezone=Asia/Chongqing&useLegacyDatetimeCode=false&nullNamePatternMatchesAll=true&zeroDateTimeBehavior=CONVERT_TO_NULL&tinyInt1isBit=false&autoReconnect=true&useSSL=false&pinGlobalTxToPhysicalConnection=true
       driverClassName: com.mysql.cj.jdbc.Driver
       username: root
     #      # 下面为连接池的补充设置
@@ -56,7 +56,7 @@ fastdep:
     test:
       mapper: com.louislivi.fastdep.test.mapper.test
       password: 123456
-      url: jdbc:mysql://192.168.12.88:3306/woa_common?serverTimezone=Asia/Chongqing&useLegacyDatetimeCode=false&nullNamePatternMatchesAll=true&zeroDateTimeBehavior=CONVERT_TO_NULL&tinyInt1isBit=false&autoReconnect=true&useSSL=false&pinGlobalTxToPhysicalConnection=true
+      url: jdbc:mysql://192.168.31.83:3306/woa_common?serverTimezone=Asia/Chongqing&useLegacyDatetimeCode=false&nullNamePatternMatchesAll=true&zeroDateTimeBehavior=CONVERT_TO_NULL&tinyInt1isBit=false&autoReconnect=true&useSSL=false&pinGlobalTxToPhysicalConnection=true
       driverClassName: com.mysql.cj.jdbc.Driver
       username: root
   #      # 下面为连接池的补充设置
