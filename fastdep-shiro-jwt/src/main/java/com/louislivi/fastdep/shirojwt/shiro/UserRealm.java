@@ -1,5 +1,6 @@
 package com.louislivi.fastdep.shirojwt.shiro;
 
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.louislivi.fastdep.shirojwt.FastDepShiroJwtException;
 import com.louislivi.fastdep.shirojwt.jwt.JwtToken;
 import com.louislivi.fastdep.shirojwt.jwt.JwtUtil;
@@ -46,8 +47,10 @@ public class UserRealm extends AuthorizingRealm {
         if (!fastDepShiroJwtAuthorization.verifyUser(userId, token)) {
             throw new FastDepShiroJwtException("verify user error!");
         }
-        if (!jwtUtil.verify(token, userId)) {
-            throw new FastDepShiroJwtException("token verify error!");
+        try {
+            jwtUtil.verify(token, userId);
+        } catch (JWTVerificationException e) {
+            throw new FastDepShiroJwtException(e.getMessage());
         }
         return new SimpleAuthenticationInfo(token, token, "user_realm");
     }
