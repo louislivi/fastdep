@@ -4,6 +4,7 @@ package com.louislivi.fastdep.shirojwt.jwt;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.louislivi.fastdep.shirojwt.FastDepShiroJwtProperties;
 import com.louislivi.fastdep.shirojwt.shiro.FastDepShiroJwtAuthorization;
@@ -32,21 +33,17 @@ public class JwtUtil {
      *
      * @param token token
      * @param userId userId
-     * @return true or false
+     * @return a verified and decoded JWT.
+     * @throws JWTVerificationException if any of the verification steps fail
      */
-    public boolean verify(String token, String userId) {
-        try {
-            String secret = fastDepShiroJwtAuthorization.getSecret(userId) == null ? fastDepShiroJwtProperties.getSecret() : null;
-            assert secret != null;
-            Algorithm algorithm = Algorithm.HMAC256(secret);
-            JWTVerifier verifier = JWT.require(algorithm)
-                    .withSubject(userId)
-                    .build();
-            verifier.verify(token);
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
+    public DecodedJWT verify(String token, String userId) throws JWTVerificationException {
+        String secret = fastDepShiroJwtAuthorization.getSecret(userId) == null ? fastDepShiroJwtProperties.getSecret() : null;
+        assert secret != null;
+        Algorithm algorithm = Algorithm.HMAC256(secret);
+        JWTVerifier verifier = JWT.require(algorithm)
+                .withSubject(userId)
+                .build();
+        return verifier.verify(token);
     }
 
     /**
