@@ -6,6 +6,7 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -27,6 +28,7 @@ public class FastDepShiroJwtConfig extends FastDepShiroJwtAuthorization {
         System.out.println(collect);
         // 当前值为 [1]
         simpleAuthorizationInfo.addStringPermissions(collect);
+        simpleAuthorizationInfo.addRoles(Arrays.asList("admin", "user"));
         return simpleAuthorizationInfo;
     }
 }

@@ -31,7 +31,7 @@ public class JwtUtil {
     /**
      * verify token
      *
-     * @param token token
+     * @param token  token
      * @param userId userId
      * @return a verified and decoded JWT.
      * @throws JWTVerificationException if any of the verification steps fail

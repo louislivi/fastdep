@@ -1,5 +1,6 @@
 package com.louislivi.fastdep.datasource;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import com.atomikos.jdbc.AtomikosDataSourceBean;
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -24,6 +25,8 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.type.AnnotationMetadata;
 
 import javax.sql.DataSource;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.concurrent.ConcurrentHashMap;
@@ -67,26 +70,41 @@ public class FastDepDataSourceRegister implements EnvironmentAware, ImportBeanDe
             return;
         }
         for (String key : multipleDataSources.keySet()) {
-            // datasource
-            Supplier<DataSource> dataSourceSupplier = () -> {
-                //获取注册数据
-                AtomikosDataSourceBean registerDataSource = (AtomikosDataSourceBean) registerBean.get(key + "DataSource");
-                if (registerDataSource != null) {
+            FastDepDataSourceProperties.DataSource fastDepDataSource = binder.bind("fastdep.datasource." + key, FastDepDataSourceProperties.DataSource.class).get();
+            List<String> xaDataSource = Arrays.asList("oracle", "mysql", "mariadb", "postgresql", "h2", "jtds");
+            Supplier<DataSource> dataSourceSupplier;
+            if (xaDataSource.contains(fastDepDataSource.getDbType())) {
+                // datasource
+                dataSourceSupplier = () -> {
+                    // get register data
+                    AtomikosDataSourceBean registerDataSource = (AtomikosDataSourceBean) registerBean.get(key + "DataSource");
+                    if (registerDataSource != null) {
+                        return registerDataSource;
+                    }
+                    registerDataSource = new AtomikosDataSourceBean();
+                    registerDataSource.setXaDataSourceClassName("com.alibaba.druid.pool.xa.DruidXADataSource");
+                    registerDataSource.setXaDataSource(fastDepDataSource);
+                    registerDataSource.setUniqueResourceName(key);
+                    registerDataSource.setMinPoolSize(fastDepDataSource.getMinIdle());
+                    registerDataSource.setMaxPoolSize(fastDepDataSource.getMaxActive());
+                    registerDataSource.setBorrowConnectionTimeout((int) fastDepDataSource.getTimeBetweenEvictionRunsMillis());
+                    registerDataSource.setMaxIdleTime((int) fastDepDataSource.getMaxEvictableIdleTimeMillis());
+                    registerDataSource.setTestQuery(fastDepDataSource.getValidationQuery());
+                    registerBean.put(key + "DataSource", registerDataSource);
                     return registerDataSource;
-                }
-                registerDataSource = new AtomikosDataSourceBean();
-                FastDepDataSourceProperties.DataSource fastDepDataSource = binder.bind("fastdep.datasource." + key, FastDepDataSourceProperties.DataSource.class).get();
-                registerDataSource.setXaDataSourceClassName("com.alibaba.druid.pool.xa.DruidXADataSource");
-                registerDataSource.setUniqueResourceName(key);
-                registerDataSource.setMinPoolSize(fastDepDataSource.getMinIdle());
-                registerDataSource.setMaxPoolSize(fastDepDataSource.getMaxActive());
-                registerDataSource.setBorrowConnectionTimeout((int) fastDepDataSource.getTimeBetweenEvictionRunsMillis());
-                registerDataSource.setMaxIdleTime((int) fastDepDataSource.getMaxEvictableIdleTimeMillis());
-                registerDataSource.setTestQuery(fastDepDataSource.getValidationQuery());
-                registerDataSource.setXaDataSource(fastDepDataSource);
-                registerBean.put(key + "DataSource", registerDataSource);
-                return registerDataSource;
-            };
+                };
+            } else {
+                dataSourceSupplier = () -> {
+                    // fix xa not support
+                    DruidDataSource registerDataSource = (DruidDataSource) registerBean.get(key + "DataSource");
+                    if (registerDataSource != null) {
+                        return registerDataSource;
+                    }
+                    registerDataSource = fastDepDataSource;
+                    registerBean.put(key + "DataSource", registerDataSource);
+                    return registerDataSource;
+                };
+            }
             DataSource dataSource = dataSourceSupplier.get();
             BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(DataSource.class, dataSourceSupplier);
             AbstractBeanDefinition datasourceBean = builder.getRawBeanDefinition();
