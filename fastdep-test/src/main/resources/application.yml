@@ -29,9 +29,9 @@ fastdep:
     clickhouse:
       mapper: com.louislivi.fastdep.test.mapper.test
       driverClassName: ru.yandex.clickhouse.ClickHouseDriver
-      url: jdbc:clickhouse://127.0.0.1:8123/test
-      username: root
-      password: 123456
+      url: jdbc:clickhouse://cc-wz902e8cy5ks77g2do.ads.aliyuncs.com:8123/test
+      username: novel_maiya
+      password: jgGT4bO1YLCMM7pBkHydDlEcyg2fVfIR
       initialSize: 10
       maxActive: 100
       minIdle: 10
