@@ -21,14 +21,12 @@ import org.springframework.boot.context.properties.source.ConfigurationPropertyN
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.type.AnnotationMetadata;
 
 import javax.sql.DataSource;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 
@@ -121,7 +119,20 @@ public class FastDepDataSourceRegister implements EnvironmentAware, ImportBeanDe
                     fb.setDataSource(dataSource);
                     fb.setTypeAliasesPackage(env.getProperty("mybatis.typeAliasesPackage"));
                     // mybatis.mapper-locations
-                    fb.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(env.getProperty("mybatis.mapper-locations")));
+//                    fb.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(env.getProperty("mybatis.mapper-locations")));
+
+                    String mapperLocations = env.getProperty("mybatis.mapper-locations");
+                    List<Resource> resourceList = new ArrayList<>();
+                    if (mapperLocations != null && mapperLocations.indexOf(",") > 0) {
+                        String[] mapperLocation = mapperLocations.split(",");
+                        for (String location : mapperLocation) {
+                            resourceList.addAll(Arrays.asList(new PathMatchingResourcePatternResolver().getResources(location)));
+                        }
+                        fb.setMapperLocations(resourceList.toArray(new Resource[resourceList.size()]));
+                    } else {
+                        fb.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(env.getProperty("mybatis.mapper-locations")));
+                    }
+
                     // mybatis.configuration
                     BindResult<Configuration> bindConfiguration = binder.bind("mybatis.configuration", Configuration.class);
                     if (bindConfiguration.isBound()) {
