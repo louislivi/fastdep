@@ -22,16 +22,16 @@ fastdep:
   datasource:
     douyin:
       mapper: com.louislivi.fastdep.test.mapper.douyin
-      password: 123456
       url: jdbc:mysql://maiya.mysql.com:3306/douyin?serverTimezone=Asia/Chongqing&useLegacyDatetimeCode=false&nullNamePatternMatchesAll=true&zeroDateTimeBehavior=CONVERT_TO_NULL&tinyInt1isBit=false&autoReconnect=true&useSSL=false&pinGlobalTxToPhysicalConnection=true
       driverClassName: com.mysql.cj.jdbc.Driver
       username: root
+      password: 123456
     clickhouse:
       mapper: com.louislivi.fastdep.test.mapper.test
       driverClassName: ru.yandex.clickhouse.ClickHouseDriver
-      url: jdbc:clickhouse://cc-wz902e8cy5ks77g2do.ads.aliyuncs.com:8123/test
-      username: novel_maiya
-      password: jgGT4bO1YLCMM7pBkHydDlEcyg2fVfIR
+      url: jdbc:clickhouse://127.0.0.1:8123/test
+      username: root
+      password: 12345
       initialSize: 10
       maxActive: 100
       minIdle: 10

@@ -2,10 +2,10 @@ package com.louislivi.fastdep.datasource;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.atomikos.jdbc.AtomikosDataSourceBean;
-import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.mybatis.spring.boot.autoconfigure.MybatisProperties;
 import org.mybatis.spring.mapper.ClassPathMapperScanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,18 +15,18 @@ import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
-import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.boot.context.properties.bind.Binder;
 import org.springframework.boot.context.properties.source.ConfigurationPropertyNameAliases;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.env.Environment;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.type.AnnotationMetadata;
 
 import javax.sql.DataSource;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 
@@ -116,33 +116,26 @@ public class FastDepDataSourceRegister implements EnvironmentAware, ImportBeanDe
                 }
                 try {
                     SqlSessionFactoryBean fb = new SqlSessionFactoryBean();
+                    // init mybatis properties
+                    MybatisProperties mybatis;
+                    try {
+                        mybatis = binder.bind("mybatis", MybatisProperties.class).get();
+                    } catch (NoSuchElementException e) {
+                        mybatis = new MybatisProperties();
+                    }
+                    // set datasource
                     fb.setDataSource(dataSource);
-                    fb.setTypeAliasesPackage(env.getProperty("mybatis.typeAliasesPackage"));
+                    fb.setTypeAliasesPackage(mybatis.getTypeAliasesPackage());
+                    fb.setTypeHandlersPackage(mybatis.getTypeHandlersPackage());
                     // mybatis.mapper-locations
-//                    fb.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(env.getProperty("mybatis.mapper-locations")));
-
-                    String mapperLocations = env.getProperty("mybatis.mapper-locations");
-                    List<Resource> resourceList = new ArrayList<>();
-                    if (mapperLocations != null && mapperLocations.indexOf(",") > 0) {
-                        String[] mapperLocation = mapperLocations.split(",");
-                        for (String location : mapperLocation) {
-                            resourceList.addAll(Arrays.asList(new PathMatchingResourcePatternResolver().getResources(location)));
-                        }
-                        fb.setMapperLocations(resourceList.toArray(new Resource[resourceList.size()]));
-                    } else {
-                        fb.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(env.getProperty("mybatis.mapper-locations")));
-                    }
-
+                    fb.setMapperLocations(mybatis.resolveMapperLocations());
                     // mybatis.configuration
-                    BindResult<Configuration> bindConfiguration = binder.bind("mybatis.configuration", Configuration.class);
-                    if (bindConfiguration.isBound()) {
-                        fb.setConfiguration(bindConfiguration.get());
-                    }
+                    fb.setConfiguration(mybatis.getConfiguration());
                     registerSqlSessionFactory = fb.getObject();
                     registerBean.put(key + "SqlSessionFactory", registerSqlSessionFactory);
                     return registerSqlSessionFactory;
                 } catch (Exception e) {
-                    logger.error("", e);
+                    logger.error("Failed register dataSource.", e);
                 }
                 return null;
             };
@@ -163,7 +156,7 @@ public class FastDepDataSourceRegister implements EnvironmentAware, ImportBeanDe
             scanner.registerFilters();
             String mapperProperty = env.getProperty("fastdep.datasource." + key + ".mapper");
             if (mapperProperty == null) {
-                logger.error("Failed to configure fastDep DataSource: fastdep.datasource." + key + ".mapper cannot be null.");
+                logger.error("Failed to configure fastDep dataSource: fastdep.datasource." + key + ".mapper cannot be null.");
                 return;
             }
             scanner.doScan(mapperProperty);
