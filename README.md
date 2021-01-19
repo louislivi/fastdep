@@ -27,12 +27,12 @@ fastdep
     <dependency>
         <groupId>com.louislivi.fastdep</groupId>
         <artifactId>${模块名称}</artifactId>
-        <version>1.0.5</version>
+        <version>1.0.6</version>
     </dependency>
     ```
     - Gradle
     ```groovy
-    compile group: 'com.louislivi.fastdep', name: '${Module Name}', version: '1.0.5'
+    compile group: 'com.louislivi.fastdep', name: '${Module Name}', version: '1.0.6'
     ```
   
 模块
