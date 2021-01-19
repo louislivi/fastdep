@@ -23,6 +23,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.type.AnnotationMetadata;
 
 import javax.sql.DataSource;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +41,8 @@ public class FastDepDataSourceRegister implements EnvironmentAware, ImportBeanDe
 
     private static final Logger logger = LoggerFactory.getLogger(FastDepDataSourceRegister.class);
     private final static ConfigurationPropertyNameAliases ALIASES = new ConfigurationPropertyNameAliases();
+
+    private final static List<String> XA_DATA_SOURCE = Arrays.asList("oracle", "mysql", "mariadb", "postgresql", "h2", "jtds");
 
     private static Map<String, Object> registerBean = new ConcurrentHashMap<>();
 
@@ -69,9 +72,14 @@ public class FastDepDataSourceRegister implements EnvironmentAware, ImportBeanDe
         }
         for (String key : multipleDataSources.keySet()) {
             FastDepDataSourceProperties.DataSource fastDepDataSource = binder.bind("fastdep.datasource." + key, FastDepDataSourceProperties.DataSource.class).get();
-            List<String> xaDataSource = Arrays.asList("oracle", "mysql", "mariadb", "postgresql", "h2", "jtds");
             Supplier<DataSource> dataSourceSupplier;
-            if (xaDataSource.contains(fastDepDataSource.getDbType())) {
+            try {
+                fastDepDataSource.init();
+            } catch (SQLException e) {
+                logger.error("Failed register dataSource.", e);
+                continue;
+            }
+            if (XA_DATA_SOURCE.contains(fastDepDataSource.getDbType())) {
                 // datasource
                 dataSourceSupplier = () -> {
                     // get register data
