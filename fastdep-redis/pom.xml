@@ -21,7 +21,7 @@
     </developers>
 
     <properties>
-        <apache.commons.version>2.7.0</apache.commons.version>
+        <apache.commons.version>2.10.0</apache.commons.version>
     </properties>
 
     <dependencies>
