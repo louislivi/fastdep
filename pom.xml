@@ -7,7 +7,7 @@
     <groupId>com.louislivi.fastdep</groupId>
     <artifactId>fastdep</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.6</version>
+    <version>1.0.7</version>
     <name>fastdep</name>
     <description>Fast integration dependencies in Spring Boot.</description>
     <url>https://github.com/louislivi/fastdep</url>
