@@ -61,27 +61,24 @@ public class FastDepRedisRegister implements EnvironmentAware, ImportBeanDefinit
         }
         boolean onPrimary = true;
         for (String key : multipleRedis.keySet()) {
-            Map map = binder.bind("fastdep.redis." + key, Map.class).get();
+            RedisProperties properties = binder.bind("fastdep.redis." + key, RedisProperties.class).get();
             // RedisStandaloneConfiguration
             RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration();
-            configuration.setHostName(String.valueOf(map.get("host")));
-            configuration.setPort(Integer.parseInt(String.valueOf(map.get("port"))));
-            configuration.setDatabase(Integer.parseInt(String.valueOf(map.get("database"))));
-            String password = String.valueOf(map.get("password"));
-            if (!StringUtils.isEmpty(password)) {
-                RedisPassword redisPassword = RedisPassword.of(password);
-                configuration.setPassword(redisPassword);
-            }
+            configuration.setHostName(properties.getHost());
+            configuration.setPort(properties.getPort());
+            configuration.setDatabase(properties.getDatabase());
+            configuration.setPassword(properties.getPassword());
+
+            RedisProperties.Lettuce propertiesLettuce = properties.getLettuce();
+
             // GenericObjectPoolConfig
             GenericObjectPoolConfig genericObjectPoolConfig = new GenericObjectPoolConfig();
             try {
-                RedisProperties.Pool pool = binder.bind("fastdep.redis." + key + ".lettuce.pool", RedisProperties.Pool.class).get();
+                RedisProperties.Pool pool = propertiesLettuce.getPool();
                 genericObjectPoolConfig.setMaxIdle(pool.getMaxIdle());
                 genericObjectPoolConfig.setMaxTotal(pool.getMaxActive());
                 genericObjectPoolConfig.setMinIdle(pool.getMinIdle());
-                if (pool.getMaxWait() != null) {
-                    genericObjectPoolConfig.setMaxWaitMillis(pool.getMaxWait().toMillis());
-                }
+                genericObjectPoolConfig.setMaxWaitMillis(pool.getMaxWait().toMillis());
             } catch (NoSuchElementException ignore) {
             }
             //LettuceConnectionFactory
@@ -92,7 +89,7 @@ public class FastDepRedisRegister implements EnvironmentAware, ImportBeanDefinit
                 }
                 LettucePoolingClientConfiguration.LettucePoolingClientConfigurationBuilder builder = LettucePoolingClientConfiguration.builder();
                 try {
-                    Duration shutdownTimeout = binder.bind("fastdep.redis." + key + ".shutdown-timeout", Duration.class).get();
+                    Duration shutdownTimeout = propertiesLettuce.getShutdownTimeout();
                     if (shutdownTimeout != null) {
                         builder.shutdownTimeout(shutdownTimeout);
                     }
@@ -115,12 +112,14 @@ public class FastDepRedisRegister implements EnvironmentAware, ImportBeanDefinit
             constructorArgumentValues.addIndexedArgumentValue(0, lettuceConnectionFactory);
             stringRedisTemplate.setConstructorArgumentValues(constructorArgumentValues);
             stringRedisTemplate.setAutowireMode(AutowireCapableBeanFactory.AUTOWIRE_BY_NAME);
+            stringRedisTemplate.setPrimary(onPrimary);
             beanDefinitionRegistry.registerBeanDefinition(key + "StringRedisTemplate", stringRedisTemplate);
             // RedisTemplate
             GenericBeanDefinition redisTemplate = new GenericBeanDefinition();
             redisTemplate.setBeanClass(RedisTemplate.class);
             redisTemplate.getPropertyValues().add("connectionFactory", lettuceConnectionFactory);
             redisTemplate.setAutowireMode(AutowireCapableBeanFactory.AUTOWIRE_BY_NAME);
+            redisTemplate.setPrimary(onPrimary);
             beanDefinitionRegistry.registerBeanDefinition(key + "RedisTemplate", redisTemplate);
             logger.info("Registration redis ({}) !", key);
             if (onPrimary) {
