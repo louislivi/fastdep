@@ -26,7 +26,7 @@
     </developers>
 
     <properties>
-        <spring.starter.version>2.1.5.RELEASE</spring.starter.version>
+        <spring.starter.version>2.5.12</spring.starter.version>
         <spring.version>5.1.7.RELEASE</spring.version>
         <maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
         <gpg.skip>false</gpg.skip>
