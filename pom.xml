@@ -46,7 +46,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>${spring.starter.version}</version>
+            <version>2.7.18</version>
         </dependency>
     </dependencies>
 
