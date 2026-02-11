@@ -22,7 +22,7 @@
     </developers>
 
     <properties>
-        <shiro.version>1.7.1</shiro.version>
+        <shiro.version>2.1.0</shiro.version>
         <jwt.version>3.18.1</jwt.version>
     </properties>
 
